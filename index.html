@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io("http://localhost:5000")
+      socket.on("news", function(data) {
+        // console.log(data)
+        document.getElementById("timeSetData").innerHTML =
+          JSON.stringify(data.hello) + " You can view time on your android app."
+        // setInterval(() => console.log(data), 1000)
+        socket.emit("my other event", { my: data })
+      })
+    </script>
+    <style>
+      .text-center {
+        /* padding: 20px; */
+        text-align: center;
+      }
+      body {
+        background: rgb(250, 81, 81);
+      }
+      h1 {
+        color: rgb(255, 51, 51);
+        padding: 0;
+        margin: 0;
+      }
+      .container {
+        padding: 20px;
+        width: 60%;
+        margin-top: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
+        margin: auto;
+        background: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center">Stack of the bulbs to set time.</h1>
+      <h3 class="text-center">
+        Time To set : <strong id="timeSetData"></strong>
+      </h3>
+    </div>
+  </body>
+</html>
